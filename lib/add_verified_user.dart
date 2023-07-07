@@ -311,7 +311,7 @@ class _add_verified_userState extends State<add_verified_user> {
                     onPressed: () {
                       print('Add Button Has Clicked...');
                       cubit.verifiedUser(
-                        token: token!,
+                        token: 'Bearer $token',
                         name: nameController.text,
                         email: emailController.text,
                         password: passwordController.text,

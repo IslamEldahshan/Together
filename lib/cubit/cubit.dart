@@ -10,9 +10,11 @@ import 'package:graduation/guest_profile.dart';
 import 'package:graduation/home.dart';
 import 'package:graduation/logIn.dart';
 import 'package:graduation/models/admin_profile_model.dart';
+import 'package:graduation/models/get_requests_model.dart';
 import 'package:graduation/models/home_model.dart';
 import 'package:graduation/models/login_model.dart';
 import 'package:graduation/models/user_profile_model.dart';
+import 'package:graduation/models/verified_user_model.dart';
 import 'package:graduation/network/endpoints.dart';
 import 'package:graduation/network/local/cache_helper.dart';
 import 'package:graduation/network/remote/dio_helper.dart';
@@ -62,7 +64,7 @@ class AppCubit extends Cubit<AppStates>{
     RequestStatusScreen(),
     Donate(),
     Post(),
-    guest_profile(),
+    admin_profile(),
   ];
 
 
@@ -160,6 +162,7 @@ class AppCubit extends Cubit<AppStates>{
         }
         else{
           getUserProfile(token: 'Bearer $token');
+          getRequestData(token: 'Bearer $token');
         }
         // emit(GetHomeSuccessState());
       }).catchError((error){
@@ -171,20 +174,22 @@ class AppCubit extends Cubit<AppStates>{
 
 
 
+  GetRequestsModel? getRequestsModel;
   void getRequestData({
     required String token,
 }) async{
     if(token != null){
-      emit(GetRequestsLoadingState());
+      // emit(GetRequestsLoadingState());
       await DioHelper.getData(
         path: requests,
         token: token,
       ).then((value){
         print('--------------------------- Get Requests Data Has Done ----------------------');
         print('Request Data =========> ${value.data}');
-        emit(GetRequestsSuccessState());
+        getRequestsModel = GetRequestsModel.fromJson(value.data);
+        // emit(GetRequestsSuccessState());
       }).catchError((error){
-        emit(GetRequestsErrorState());
+        // emit(GetRequestsErrorState());
         print('Error When Get Requests Data =====> ${error.toString()}');
       });
     }
@@ -243,6 +248,7 @@ class AppCubit extends Cubit<AppStates>{
   }
 
 
+  VerifiedUserModel? verifiedUserModel;
   void verifiedUser({
     required String name,
     required String email,
@@ -268,7 +274,10 @@ class AppCubit extends Cubit<AppStates>{
       },
       token: token,
     ).then((value){
-      print('Verified User Done ======> ${value.data}');
+      // print('Verified User Done ======> ${value.data}');
+      verifiedUserModel = VerifiedUserModel.fromJson(value.data);
+      print('Verified User Done ======> ${verifiedUserModel!.status}');
+
     }).catchError((error){
       print('Error When Verified User =====> ${error.toString()}');
     });

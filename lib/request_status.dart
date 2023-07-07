@@ -74,134 +74,130 @@ class RequestStatusScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: 150.0,
-                width: double.infinity,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadiusDirectional.circular(12.0,),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(borderRadius:BorderRadius.circular(12),
-                      ),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: Image.asset(
-                        'image/kerb.jpg',
-                        width: 130.0,
-                        height: double.infinity,
-                        fit: BoxFit.fill,
-                      ),
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) => Container(
+                    height: 150.0,
+                    width: double.infinity,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadiusDirectional.circular(12.0,),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal:7,
-                        vertical: 7,
-                      ),
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Chicken wings',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            // Favorite Icon
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(borderRadius:BorderRadius.circular(12),
+                          ),
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          child: Image.network(
+                            '${cubit.getRequestsModel!.data![index].image}',
+                            width: 130.0,
+                            height: double.infinity,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal:7,
+                            vertical: 7,
+                          ),
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Halal',
+                                  '${cubit.getRequestsModel!.data![index].productName}',
                                   style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: textColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 10.0,
+                               const  SizedBox(
+                                  height: 15.0,
                                 ),
+                                // Favorite Icon
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    InkWell(
-                                      child: Icon(
-                                        cubit.favorite,
-                                        size: 20.0,
-                                        color: Colors.red,
-                                      ),
-                                      onTap: () {
-                                        cubit.changeFavoriteIcon();
-                                      },
+                                    Row(
+                                      children: [
+                                        InkWell(
+                                          child: Icon(
+                                            cubit.favorite,
+                                            size: 20.0,
+                                            color: Colors.red,
+                                          ),
+                                          onTap: () {
+                                            cubit.changeFavoriteIcon();
+                                          },
+                                        ),
+                                        const SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        Text(
+                                          '9 likes',
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     const SizedBox(
-                                      width: 5.0,
+                                      width: 10.0,
                                     ),
                                     Text(
-                                      '9 likes',
+                                      '${cubit.getRequestsModel!.data![index].productDeliveryMethod}',
                                       style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.red,
+                                        fontSize: 14.0,
+                                        color: textColor,
                                       ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(
-                                  width: 10.0,
+                                  height: 20.0,
                                 ),
-                                Text(
-                                  'Self Collect',
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: textColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on,
-                                  color: primaryColor,
-                                ),
-                                const Text(
-                                  '18 km away',
-                                ),
-                                const SizedBox(
-                                  width: 20.0,
-                                ),
-                                const CircleAvatar(
-                                  radius: 10.0,
-                                  backgroundColor: Colors.black,
-                                  child: Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 17.0,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5.0,
-                                ),
-                                const Text(
-                                  'for 3',
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.location_on,
+                                      color: primaryColor,
+                                    ),
+                                    const Text(
+                                      '18 km away',
+                                    ),
+                                    const SizedBox(
+                                      width: 20.0,
+                                    ),
+                                    const CircleAvatar(
+                                      radius: 10.0,
+                                      backgroundColor: Colors.black,
+                                      child: Icon(
+                                        Icons.person,
+                                        color: Colors.white,
+                                        size: 17.0,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    const Text(
+                                      'for 3',
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
+                  separatorBuilder: (context, index) => const SizedBox(height: 15,),
+                  itemCount: cubit.getRequestsModel!.data!.length,
                 ),
               ),
               const SizedBox(
@@ -237,6 +233,9 @@ class RequestStatusScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 15.0,
               ),
             ],
           ),

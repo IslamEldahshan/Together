@@ -33,6 +33,7 @@ class DioHelper {
   }) async {
     dio!.options.headers = {
       'authorization':token,
+      'accept': 'application/json'
     };
     return await dio!.post(
       path,

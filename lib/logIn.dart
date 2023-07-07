@@ -154,7 +154,7 @@ class _logInState extends State<logIn> {
                           cubit.signIn(
                             email: emailController.text,
                             password: passwordController.text,
-                            type: 'user',
+                            type: 'admin',
                           );
 
                           // navigateAndFinish(context, LayoutScreen());
